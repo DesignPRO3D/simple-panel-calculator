@@ -1,0 +1,7 @@
+{
+  "name": "SimplePanelCalculator",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
