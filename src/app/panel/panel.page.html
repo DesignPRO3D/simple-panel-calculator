@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Panel Calculator</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onToggleDrawings()" fill="outline">
+        {{ toggleDrawings ? 'Hide Dwg' : 'Show Dwg' }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12" size-md="10" offset-md="1" size-lg="8" offset-lg="2">
+
+        <img src="/assets/images/panel.png" alt="Panel" *ngIf="toggleDrawings">
+
+        <ion-grid fixed class="ion-no-margin">
+
+          <ion-row>
+            <ion-col size="12" size-md="8" offset-md="2">
+              <ion-item lines="none">
+                <ion-label position="inline" color="medium">Length:</ion-label>
+                <ion-input type="number" [(ngModel)]="_length" autofocus (ionChange)="onCalculateData()"></ion-input>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label position="inline" color="medium">Bar D:</ion-label>
+                <ion-input type="number" [(ngModel)]="_barDiam" (ionChange)="onCalculateData()"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="inline" color="medium">Bar Number:</ion-label>
+                <ion-input type="number" [(ngModel)]="_barNum" (ionChange)="onCalculateData()"></ion-input>
+              </ion-item>
+
+              <ion-item lines="none">
+                <ion-label class="label-result" position="inline" color="medium">Gap:</ion-label>
+                <ion-input class="input-result" type="number" disabled="true" [(ngModel)]="_gap"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-card *ngIf="_gap">
+          <ion-card-header>
+            <ion-card-subtitle>Start Points</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item
+                *ngFor="let s of _startPoints; let i = index"
+                [color]="i % 2 ? 'medium' : 'light'"
+              >
+                S{{ i + 1 }}: <strong style="margin-left: 1em;">{{ s }}</strong>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
